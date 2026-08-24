@@ -70,7 +70,7 @@ fi
 
 # ---------- 3. 设置 GitHub 凭据（Token）----------
 # 说明：macOS 重装系统后钥匙串会被清空，导致 git push 需要重新认证。
-# 运行本脚本时，如果钥匙串里没有 github 凭据，会提示输入 Token 并存入钥匙串，
+# 本脚本在钥匙串缺失时会提示用户手动粘贴 Token，并存入钥匙串，
 # 之后所有项目的 git push 都无需再输凭据。
 echo ""
 echo "🔑 正在检查 GitHub 凭据是否已存在..."
@@ -78,10 +78,18 @@ GITHUB_USER="Giaosm"
 if printf 'protocol=https\nhost=github.com\n\n' | git credential-osxkeychain get 2>/dev/null | grep -q "^username="; then
     echo "✅ GitHub 凭据已存在，无需重复设置。"
 else
-    echo "⚠️  检测到 GitHub 凭据缺失。"
-    echo "   请在浏览器打开 GitHub → Settings → Developer settings → Personal access tokens"
-    echo "   生成一个勾选了 repo 权限的 Token，然后粘贴到下方："
-    read -r -p "请输入 GitHub Token（ghp_ 开头）: " GH_TOKEN
+    echo "⚠️  检测到 GitHub 凭据缺失，需要您手动提供 Token。"
+    echo ""
+    echo "    生成 Token 的步骤（可直接点击下方链接在浏览器打开）："
+    echo "    https://github.com/settings/tokens/new"
+    echo ""
+    echo "    在该页面："
+    echo "      1. Note 随便填（如 proxy-setup）"
+    echo "      2. Expiration 选 No expiration（永久）"
+    echo "      3. 勾选 repo 权限"
+    echo "      4. 点 Generate token，复制生成的 ghp_ 开头的字符串"
+    echo ""
+    read -r -p "请粘贴 GitHub Token（ghp_ 开头）: " GH_TOKEN
     if [ -n "$GH_TOKEN" ]; then
         printf 'protocol=https\nhost=github.com\nusername=%s\npassword=%s\n\n' "$GITHUB_USER" "$GH_TOKEN" | git credential-osxkeychain store
         echo "✅ GitHub Token 已存入钥匙串，之后 git push 无需再认证。"

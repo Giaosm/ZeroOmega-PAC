@@ -8,30 +8,73 @@ var PROXY = "PROXY 127.0.0.1:7897; DIRECT";
 
 // 需要走代理的国外网站关键字/域名列表（黑名单）
 var proxyDomains = [
-    "google", "googleapis", "googleusercontent", "gstatic", "ggpht",
-    "youtube", "youtu", "ytimg", "googlevideo", "yt.be",
-    "steampowered", "steamcommunity", "steamstatic", "steamcdn",
-    "steamserver", "steamusercontent", "valvesoftware",
-    "github", "githubusercontent", "githubassets", "gitlab", "bitbucket",
-    "twitter", "x.com", "twimg", "facebook", "fbcdn", "instagram", "whatsapp",
+    // Google 系
+    "google", "gstatic", "ggpht",
+    // YouTube
+    "youtu", "ytimg", "yt.be",
+    // Steam / Valve
+    "steam",
+    "valvesoftware",
+    // 代码托管
+    "github", "gitlab", "bitbucket",
+    // X / Twitter
+    "twitter", "x.com", "twimg",
+    // Meta
+    "facebook", "fbcdn", "instagram", "whatsapp",
+    // Telegram
     "telegram", "t.me", "tdesktop", "telegra.ph",
-    "discord", "discordapp", "reddit", "redd.it", "imgur",
-    "twitch", "ttvnw", "pinterest", "pinimg", "tiktok", "tiktokcdn",
-    "linkedin", "licdn", "snapchat",
-    "wikimedia", "wikipedia", "stackoverflow", "stackexchange",
-    "medium", "quora", "netflix", "hulu", "spotify",
-    "apple", "icloud", "dropbox", "mega.nz", "cloudflare", "fastly", "cloudfront",
-    "v2ex", "nytimes", "bbc", "cnn", "wired", "theverge",
+    // Discord / Reddit
+    "discord",
+    "reddit", "redd.it", "imgur",
+    // 直播
+    "twitch", "ttvnw",
+    // Pinterest / TikTok / LinkedIn / Snapchat
+    "pinterest", "pinimg",
+    "tiktok",
+    "linkedin", "licdn",
+    "snapchat",
+    // 维基 / 技术社区
+    "wikimedia", "wikipedia",
+    "stackoverflow", "stackexchange",
+    "medium", "quora",
     "hackernews", "news.ycombinator",
-    "npmjs", "docker", "maven", "pypi", "pypi.org", "nuget", "crates.io",
-    "golang.org", "rust-lang",
-    "openai", "chatgpt", "anthropic", "claude.ai", "claude", "gemini", "perplexity",
-    "notion", "figma", "slack", "zoom.us", "huggingface",
-    "arxiv", "springer", "sciencedirect", "klei",
-    "epicgames", "epic.com", "epicgames.com", "epicgames.dev", "epicgames.net",
-    "unrealengine", "easyanticheat",
-    "baozimh", "mangabz", "pixiv", "pikpak",
-    "91porn", "pornhub", "phncdn", "51cg", "jiuse3", "cdn77", "greasyfork"
+    "v2ex",
+    // 流媒体
+    "netflix", "hulu", "spotify", "vimeo", "soundcloud",
+    // Apple
+    "apple", "icloud",
+    // 云存储 / CDN
+    "dropbox", "mega.nz", "cloudflare", "fastly", "cloudfront", "cdn77",
+    // 新闻
+    "nytimes", "bbc", "cnn", "wired", "theverge",
+    // 包管理 / 开发工具
+    "npmjs", "docker", "maven", "pypi", "nuget", "crates.io",
+    "golang.org", "go.dev", "rust-lang", "rustup.rs", "pub.dev",
+    // 用户脚本（油猴）
+    "greasyfork",
+    // AI
+    "openai", "chatgpt", "anthropic", "claude",
+    "gemini", "perplexity", "huggingface", "midjourney",
+    // 效率办公 / 众筹
+    "notion", "figma", "slack", "zoom.us", "trello", "atlassian", "patreon",
+    // 学术
+    "arxiv", "springer", "sciencedirect",
+    // Klei（饥荒）
+    "klei",
+    // Epic
+    "epicgames", "epic.com", "unrealengine", "easyanticheat",
+    // 其他游戏平台
+    "itch.io", "gog.com", "riotgames",
+    // 漫画 / 插画
+    "baozimh", "mangabz", "mangadex",
+    "pixiv", "pximg",
+    // 壁纸 / 设计 / 图床
+    "wallhaven",
+    "behance", "dribbble", "flickr",
+    // 网盘
+    "pikpak",
+    // 其他需代理站点
+    "91porn", "pornhub", "phncdn", "51cg", "jiuse3"
 ];
 
 // 需要直连的例外域名（即使包含以上关键字，也保持直连）

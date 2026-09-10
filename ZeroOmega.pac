@@ -68,6 +68,8 @@ var proxyDomains = [
     // 漫画 / 插画
     "baozimh", "mangabz", "mangadex",
     "pixiv", "pximg",
+    // 动漫 BT
+    "nyaa",
     // 壁纸 / 设计 / 图床
     "wallhaven",
     "behance", "dribbble", "flickr",
